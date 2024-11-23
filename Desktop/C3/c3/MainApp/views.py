@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.conf import settings
 from datetime import datetime
 import json
-from .forms import CustomUserCreationForm
+from .forms import Formulario, CustomUserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 
@@ -53,6 +53,40 @@ def Register(request):
 
     return render(request, 'register.html', data)
 
+
+def Login(request):
+    if request.method == "POST":
+        form = Formulario(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get("email")
+            password = form.cleaned_data.get("password")
+            print(f"Attempting login with email: {email} and password: {password}")
+            
+            # Check if email and password are not None
+            if email and password:
+                print("Calling authenticate()")
+                try:
+                    user = authenticate(request, username=email, password=password)
+                except Exception as e:
+                    print(f"Exception during authentication: {e}")
+                    form.add_error(None, "An error occurred during login")
+                    return render(request, 'login.html', {'form': form})
+                print(f"Authenticate returned: {user}")
+                if user is not None:
+                    login(request, user)
+                    return redirect('/')
+                else:
+                    print("Authentication failed: Invalid email or password")
+                    form.add_error(None, "Invalid email or password")
+            else:
+                print("Form data is missing email or password")
+                form.add_error(None, "Please enter both email and password")
+    else:
+        form = Formulario()
+    
+    return render(request, 'login.html', {
+        'form': form
+    })
 
 
 def exit(request):
