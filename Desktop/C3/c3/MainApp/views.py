@@ -54,6 +54,52 @@ def Register(request):
     return render(request, 'register.html', data)
 
 
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username', '')
+        password = request.POST.get('password', '')
+        # Verificar si el nombre de usuario de este usuario coincide con el ingresado
+        if user_with_email.username != username:
+            messages.error(request, 'El correo y el nombre de usuario no coinciden.')
+            
+        else:
+            # Autenticar con el nombre de usuario y la contraseña
+            user = authenticate(request, username=username, password=password)
+            
+            if user is not None:
+                # Si la autenticación es exitosa, iniciar sesión
+                auth_login(request, user)
+                messages.success(request, f'Bienvenido, {user.username}')
+                return redirect('index')
+            else:
+                # Contraseña incorrecta
+                messages.error(request, 'Contraseña incorrecta.')
+
+    return render(request, 'login.html')
+
+def register(request):
+    if request.method == 'POST':
+        username = request.POST.get('username', '')
+        email = request.POST.get('email', '')
+        password = request.POST.get('password', '')
+        c_password = request.POST.get('confirm_password', '')
+
+        if password != c_password:
+            messages.error(request, 'Las contraseñas no coinciden.')
+            return render(request, 'register.html')
+
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'Este correo ya está registrado.')
+            return render(request, 'register.html')
+
+        user = User.objects.create_user(username = username, email = email, password = password)
+        clientes_group = Group.objects.get(name='Usuario')
+        user.groups.add(clientes_group)
+        user.save()
+        messages.success(request, 'Te has registrado exitosamente. Ahora puedes iniciar sesión.')
+        return redirect('login')
+
+    return render(request, 'register.html')
 
 def exit(request):
     logout(request)

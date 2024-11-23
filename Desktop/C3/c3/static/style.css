@@ -27,3 +27,23 @@ body {
     border: 1px solid #336b59;
     background-color: #8c759e;
 }
+
+#register-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Centrado vertical y horizontal */
+    margin: 0 auto;
+    background-color: #bed1c3; /* Fondo verde suave */
+    font-family: Arial, sans-serif; /* Fuente legible */
+    margin: 0;
+    padding: 0;
+}
+
+#login-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Asegura que el formulario esté centrado verticalmente */
+    margin: 0 auto;
+}
