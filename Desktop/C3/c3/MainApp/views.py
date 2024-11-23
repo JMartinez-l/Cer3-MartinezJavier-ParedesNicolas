@@ -3,6 +3,9 @@ from django.shortcuts import render
 from django.conf import settings
 from datetime import datetime
 import json
+from .forms import CustomUserCreationForm
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import redirect
 
 def index(request):
     # Get current year
@@ -31,3 +34,27 @@ def index(request):
     
     return render(request, 'index.html', {'holidays': json.dumps(holiday_dates)})
 
+def Register(request):
+    data = {
+        'form': CustomUserCreationForm()
+    }
+
+    if request.method == 'POST':
+        user_creation_form = CustomUserCreationForm(data=request.POST)
+
+        if user_creation_form.is_valid():
+            user_creation_form.save()
+
+            user = authenticate(username=user_creation_form.cleaned_data['username'], password=user_creation_form.cleaned_data['password1'])
+            login(request, user)
+            return redirect('/')
+        else:
+            data['form'] = user_creation_form
+
+    return render(request, 'register.html', data)
+
+
+
+def exit(request):
+    logout(request)
+    return redirect('/')
