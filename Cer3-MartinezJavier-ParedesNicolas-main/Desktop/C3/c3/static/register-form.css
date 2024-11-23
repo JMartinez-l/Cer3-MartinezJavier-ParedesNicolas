@@ -1,0 +1,89 @@
+/* Estilo general del cuerpo */
+body {
+    background-color: #bed1c3; /* Fondo verde suave */
+    font-family: Arial, sans-serif; /* Fuente legible */
+    margin: 0;
+    padding: 0;
+}
+
+/* Centrar y dar estilo al formulario */
+#register-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Centrado vertical y horizontal */
+    margin: 0 auto;
+}
+
+/* Estilo de la tarjeta */
+.card {
+    background-color: #49a688; /* Fondo verde más oscuro */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    border: 1px solid #336b59; /* Bordes verdes oscuros */
+    padding: 20px;
+    color: #000000; /* Texto en negro */
+}
+
+/* Estilo del título */
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff; /* Texto en blanco */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Botones */
+.card-link {
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: #ffebee; /* Rosa claro para enlaces */
+    margin-right: 10px;
+}
+
+.card-link:hover {
+    color: #c62828; /* Rojo oscuro al pasar el mouse */
+}
+
+button {
+    background-color: #8c759e; /* Morado */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #5f506b; /* Morado más oscuro */
+}
+
+/* Entrada del formulario */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ff8a80; /* Rosa claro */
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #ffffff; /* Fondo blanco */
+}
+
+/* Entrada enfocada */
+input:focus {
+    border: 1px solid #5f506b; /* Morado más oscuro al enfocar */
+    outline: none;
+}
+
+/* Espaciado y alineación de elementos */
+.card-body {
+    padding: 20px;
+}
+
+.float-end {
+    margin-top: 20px;
+    float: right;
+}
