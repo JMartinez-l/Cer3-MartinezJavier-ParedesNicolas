@@ -1,5 +1,0 @@
-django == 5.1.2
-pillow
-crispy-bootstrap5
-python-dotenv
-requests==2.31.0
